@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "ball",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify lib/index.js -o dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.84.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.1.0"
+  }
+}
