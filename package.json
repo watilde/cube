@@ -5,6 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "standard --fix lib/*.js",
     "build": "browserify lib/index.js -o dist/index.js"
   },
   "keywords": [],
