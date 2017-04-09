@@ -1,11 +1,14 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 if (!Detector.webgl) Detector.addGetWebGLMessage()
+
 var mouseX = 0, mouseY = 0,
   windowHalfX = window.innerWidth / 2,
   windowHalfY = window.innerHeight / 2,
   camera, scene, renderer
+
 init()
 animate()
+
 function init () {
   var i, container
   container = document.createElement('div')
@@ -22,18 +25,12 @@ function init () {
   for (i = 0; i < points.length; i++) {
     geometry.vertices.push(points[i])
   }
-				// lines
-  var line, p, scale = 0.3, d = 125, c1 = 0x553300, c2 = 0x555555, c3 = 0x992800, g1 = geometry,
-    m1 = new THREE.LineBasicMaterial({ color: c1, opacity: 1, blending: THREE.AdditiveBlending, transparent: true }),
-    m2 = new THREE.LineBasicMaterial({ color: c2, opacity: 1, blending: THREE.AdditiveBlending, transparent: true }),
-    m3 = new THREE.LineBasicMaterial({ color: c3, opacity: 1, blending: THREE.AdditiveBlending, transparent: true }),
-    parameters = [ [ m3, scale * 0.5, [0, 0, 0], g1 ], [ m2, scale * 0.5, [d, 0, 0], g1 ], [ m2, scale * 0.5, [-d, 0, 0], g1 ],
-								   [ m2, scale * 0.5, [0, d, 0], g1 ], [ m2, scale * 0.5, [d, d, 0], g1 ], [ m2, scale * 0.5, [-d, d, 0], g1 ],
-								   [ m2, scale * 0.5, [0, -d, 0], g1 ], [ m2, scale * 0.5, [d, -d, 0], g1 ], [ m2, scale * 0.5, [-d, -d, 0], g1 ],
-								   [ m1, scale * 0.5, [2 * d, 0, 0], g1 ], [ m1, scale * 0.5, [-2 * d, 0, 0], g1 ],
-								   [ m1, scale * 0.5, [2 * d, d, 0], g1 ], [ m1, scale * 0.5, [-2 * d, d, 0], g1 ],
-								   [ m1, scale * 0.5, [2 * d, -d, 0], g1 ], [ m1, scale * 0.5, [-2 * d, -d, 0], g1 ]
-								   ]
+
+  var line, p, scale = 0.3, d = 125, c = 0x555555, g = geometry,
+    m = new THREE.LineBasicMaterial({ color: c, opacity: 1, blending: THREE.AdditiveBlending, transparent: true }),
+    parameters = [
+      [ m, scale * 0.5, [0, 0, 0], g ]
+		]
   for (i = 0; i < parameters.length; i++) {
     p = parameters[ i ]
     line = new THREE.Line(p[ 3 ], p[ 0 ])
@@ -46,7 +43,6 @@ function init () {
   document.addEventListener('mousemove', onDocumentMouseMove, false)
   document.addEventListener('touchstart', onDocumentTouchStart, false)
   document.addEventListener('touchmove', onDocumentTouchMove, false)
-				//
   window.addEventListener('resize', onWindowResize, false)
 }
 function onWindowResize () {
@@ -56,7 +52,6 @@ function onWindowResize () {
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
 }
-			//
 function onDocumentMouseMove (event) {
   mouseX = event.clientX - windowHalfX
   mouseY = event.clientY - windowHalfY
@@ -75,7 +70,6 @@ function onDocumentTouchMove (event) {
     mouseY = event.touches[ 0 ].pageY - windowHalfY
   }
 }
-			//
 function animate () {
   requestAnimationFrame(animate)
   render()

@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "standard --fix lib/*.js",
+    "lint": "standard --fix lib/index.js",
     "build": "browserify lib/index.js -o dist/index.js"
   },
   "keywords": [],
@@ -16,5 +16,8 @@
   },
   "devDependencies": {
     "browserify": "^14.1.0"
+  },
+  "standard": {
+    "globals": ["Detector", "THREE", "hilbert3D"]
   }
 }
