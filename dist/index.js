@@ -54,6 +54,13 @@ function init () {
     line.position.z = parameter[2][2]
     scene.add(line)
   }
+
+  composer = new THREE.EffectComposer(renderer)
+  composer.addPass( new THREE.RenderPass(scene, camera))
+  glitchPass = new THREE.GlitchPass()
+  glitchPass.renderToScreen = true
+  composer.addPass(glitchPass)
+
   addEventListener()
 }
 
@@ -69,6 +76,7 @@ function onWindowResize () {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
+  composer.setSize(window.innerWidth, window.innerHeight)
 }
 function onDocumentMouseMove (event) {
   mouseX = event.clientX - windowHalfX
@@ -101,7 +109,7 @@ function render () {
     var object = scene.children[ i ]
     if (object instanceof THREE.Line) object.rotation.y = time * (i % 2 ? 1 : -1)
   }
-  renderer.render(scene, camera)
+  composer.render()
 }
 
 },{}]},{},[1]);
